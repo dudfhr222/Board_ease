@@ -33,6 +33,10 @@ pageEncoding="UTF-8" %>
             <textarea cols="65" rows="10" name="b_content"></textarea>
           </td>
         </tr>
+        <tr>
+					<td>암 호</td>
+					<td><input type = "password" name = "b_pwd" size = "12" maxlength = "12"></td>
+				</tr>
         <tr height="50" align="center">
           <td colspan="4">
             <input type="button" value="글쓰기" onclick="check_ok()" />

@@ -26,7 +26,9 @@ public class BoardDBBean {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		String sql = "insert into boardt values(?,?,?,?,?,?,?)";
+		String sql = "insert into boardt values(?,?,?,?,?,?,?,?)";
+//		String sql = "insert into boardt(b_id, b_name, b_email, b_title, b_content, b_date, b_hit, b_pwd)" 
+//					  + "values(?,?,?,?,?,?,?,?)";
 		int re = -1;
 		int count = 0;
 
@@ -41,6 +43,7 @@ public class BoardDBBean {
 			}else {
 				count = 1;
 			}
+			
 			//입력값 삽입
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1,count);
@@ -50,10 +53,11 @@ public class BoardDBBean {
 			pstm.setString(5,board.getB_content());
 			pstm.setTimestamp(6,board.getB_date());
 			pstm.setInt(7,board.getB_hit());
+			pstm.setString(8,board.getB_pwd());
 			
 			pstm.executeUpdate();//UPDATE, DELETE
-			
 			re = 1;
+			
 			pstm.close();
 			conn.close();
 			System.out.println("추가 성공");
@@ -77,7 +81,6 @@ public class BoardDBBean {
 		ResultSet rs = null;
 		String sql = "select * from boardt order by b_id";
 		ArrayList<BoardBean> list = new ArrayList<BoardBean>();
-		
 		try {
 			conn = getConnection();
 			pstm = conn.prepareStatement(sql);
@@ -92,6 +95,8 @@ public class BoardDBBean {
 				board.setB_content(rs.getString(5));
 				board.setB_date(rs.getTimestamp(6));
 				board.setB_hit(rs.getInt(7));
+				board.setB_pwd(rs.getString(8));
+				
 				list.add(board);
 			}
 		}catch (Exception e) {
@@ -106,32 +111,42 @@ public class BoardDBBean {
 		ResultSet rs = null;
 		String sql = "";
 		BoardBean board = new BoardBean();
-		
 		try {
 			conn = getConnection();
 
-			sql = "update boardt set b_hit = b_hit + 1 where b_id=?";
-			pstm = conn.prepareStatement(sql);
-			pstm.setInt(1, num);
-			rs = pstm.executeQuery();
-
-			sql = "select * from boardt where b_id=?";
-			pstm = conn.prepareStatement(sql);
-			pstm.setInt(1, num);
-			rs = pstm.executeQuery();
-			
-			board.setB_id(rs.getInt("b_id"));
-			board.setB_name(rs.getString("b_name"));
-			board.setB_title(rs.getString("b_title"));
-			board.setB_content(rs.getString("b_content"));
-			board.setB_date(rs.getTimestamp("b_date"));
-			board.setB_hit(rs.getInt("b_hit"));
+				sql = "update boardt set b_hit = b_hit + 1 where b_id=?";
+				pstm = conn.prepareStatement(sql);
+				pstm.setInt(1, num);
+				rs = pstm.executeQuery();
+				
+				sql = "select * from boardt where b_id=?";
+				pstm = conn.prepareStatement(sql);
+				pstm.setInt(1, num);
+				rs = pstm.executeQuery();
+				
+			if(rs.next()) {
+				board.setB_id(rs.getInt("b_id"));
+				board.setB_name(rs.getString("b_name"));
+				board.setB_title(rs.getString("b_title"));
+				board.setB_content(rs.getString("b_content"));
+				board.setB_date(rs.getTimestamp("b_date"));
+				board.setB_hit(rs.getInt("b_hit"));
+				board.setB_pwd(rs.getString("b_pwd"));
+			}
 			
 			rs.close();
 			pstm.close();
 			conn.close();
 		}catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstm!=null) pstm.close();
+				if(conn!=null) conn.close();
+			}catch(Exception e2) {
+				e2.printStackTrace();
+			}
 		}
 		return board;
 	}
