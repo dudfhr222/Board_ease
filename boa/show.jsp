@@ -22,7 +22,9 @@
 			</tr>
 			<tr>
 				<td width = "150" align = "center">작성자</td>			
-				<td align = "center"><%=data.getB_name() %></td>			
+				<td align = "center"><%=data.getB_name() %></td>
+				<td width = "150" align = "center">작성일</td>			
+				<td align = "center"><%=data.getB_date() %></td>						
 			</tr>
 			<tr>
 				<td width = "150" align = "center">글제목</td>			

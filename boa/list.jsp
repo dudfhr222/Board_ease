@@ -28,6 +28,7 @@
 					<td width = "40" align = "center">번호</td>
 					<td width = "450" align = "center">글제목</td>
 					<td width = "120" align = "center">작성자</td>
+					<td width = "120" align = "center">작성일</td>
 				</tr>
 <%
 	for(int i =0;i<list.size();i++){
@@ -41,6 +42,9 @@
 					<td align = "center">
 						<%--<a href = "mailto:<%=a@a.com%>"><%=data.getB_name() %></a> --%> 
 						<a href = "mailto:<%=data.getB_email() %>"><%=data.getB_name() %></a> 
+					</td>
+					<td align = "center">
+						<%=data.getB_date() %>
 					</td>
 				</tr>
 <% 
