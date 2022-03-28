@@ -26,7 +26,7 @@ public class BoardDBBean {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		String sql = "insert into boardt values(?,?,?,?,?)";
+		String sql = "insert into boardt values(?,?,?,?,?,?)";
 		int re = -1;
 		int count = 0;
 
@@ -48,6 +48,7 @@ public class BoardDBBean {
 			pstm.setString(3,board.getB_email());
 			pstm.setString(4,board.getB_title());
 			pstm.setString(5,board.getB_content());
+			pstm.setTimestamp(6,board.getB_date());
 			
 			pstm.executeUpdate();//UPDATE, DELETE
 			
@@ -88,6 +89,7 @@ public class BoardDBBean {
 				board.setB_email(rs.getString(3));
 				board.setB_title(rs.getString(4));
 				board.setB_content(rs.getString(5));
+				board.setB_date(rs.getTimestamp(6));
 				list.add(board);
 			}
 		}catch (Exception e) {
@@ -114,6 +116,7 @@ public class BoardDBBean {
 			board.setB_name(rs.getString("b_name"));
 			board.setB_title(rs.getString("b_title"));
 			board.setB_content(rs.getString("b_content"));
+			board.setB_date(rs.getTimestamp("b_date"));
 			
 			rs.close();
 			pstm.close();
