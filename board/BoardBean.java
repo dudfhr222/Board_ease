@@ -9,7 +9,14 @@ public class BoardBean {
 	private String b_content;
 	private int b_id;
 	private Timestamp b_date;
+	private int b_hit;
 	
+	public int getB_hit() {
+		return b_hit;
+	}
+	public void setB_hit(int b_hit) {
+		this.b_hit = b_hit;
+	}
 	public Timestamp getB_date() {
 		return b_date;
 	}

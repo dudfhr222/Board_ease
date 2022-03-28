@@ -18,7 +18,9 @@
 		<table width = "800" border = "1">
 			<tr>
 				<td width = "150" align = "center">글번호</td>			
-				<td align = "center"><%=data.getB_id() %></td>			
+				<td align = "center"><%=data.getB_id() %></td>
+				<td width = "150" align = "center">조회수</td>			
+				<td align = "center"><%=data.getB_hit() %></td>			
 			</tr>
 			<tr>
 				<td width = "150" align = "center">작성자</td>			

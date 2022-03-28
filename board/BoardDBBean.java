@@ -26,7 +26,7 @@ public class BoardDBBean {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		String sql = "insert into boardt values(?,?,?,?,?,?)";
+		String sql = "insert into boardt values(?,?,?,?,?,?,?)";
 		int re = -1;
 		int count = 0;
 
@@ -49,6 +49,7 @@ public class BoardDBBean {
 			pstm.setString(4,board.getB_title());
 			pstm.setString(5,board.getB_content());
 			pstm.setTimestamp(6,board.getB_date());
+			pstm.setInt(7,board.getB_hit());
 			
 			pstm.executeUpdate();//UPDATE, DELETE
 			
@@ -90,6 +91,7 @@ public class BoardDBBean {
 				board.setB_title(rs.getString(4));
 				board.setB_content(rs.getString(5));
 				board.setB_date(rs.getTimestamp(6));
+				board.setB_hit(rs.getInt(7));
 				list.add(board);
 			}
 		}catch (Exception e) {
@@ -107,6 +109,12 @@ public class BoardDBBean {
 		
 		try {
 			conn = getConnection();
+
+			sql = "update boardt set b_hit = b_hit + 1 where b_id=?";
+			pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, num);
+			rs = pstm.executeQuery();
+
 			sql = "select * from boardt where b_id=?";
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, num);
@@ -117,6 +125,7 @@ public class BoardDBBean {
 			board.setB_title(rs.getString("b_title"));
 			board.setB_content(rs.getString("b_content"));
 			board.setB_date(rs.getTimestamp("b_date"));
+			board.setB_hit(rs.getInt("b_hit"));
 			
 			rs.close();
 			pstm.close();
