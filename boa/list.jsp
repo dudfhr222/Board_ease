@@ -36,7 +36,7 @@
 				%><tr onmouseover="this.style.color='red';" onmouseout="this.style.color='blue';"> 
 					<td align = "center"><%=data.getB_id() %></td>
 					<td align = "left">
-						<a href = "show.jsp"><%=data.getB_title() %></a>
+						<a href = "show.jsp?b_id=<%=data.getB_id() %>"><%=data.getB_title() %></a>
 					</td>
 					<td align = "center">
 						<%--<a href = "mailto:<%=a@a.com%>"><%=data.getB_name() %></a> --%> 
