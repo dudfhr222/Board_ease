@@ -105,7 +105,7 @@ public class BoardDBBean {
 		return list;
 	}
 	
-	public BoardBean getBoard(int num) {
+	public BoardBean getBoard(int num, boolean check) {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -114,15 +114,21 @@ public class BoardDBBean {
 		try {
 			conn = getConnection();
 
+			if(check == true) {
 				sql = "update boardt set b_hit = b_hit + 1 where b_id=?";
 				pstm = conn.prepareStatement(sql);
 				pstm.setInt(1, num);
 				rs = pstm.executeQuery();
-				
 				sql = "select * from boardt where b_id=?";
 				pstm = conn.prepareStatement(sql);
 				pstm.setInt(1, num);
 				rs = pstm.executeQuery();
+			}else{
+				sql = "select * from boardt where b_id=?";
+				pstm = conn.prepareStatement(sql);
+				pstm.setInt(1, num);
+				rs = pstm.executeQuery();
+			}
 				
 			if(rs.next()) {
 				board.setB_id(rs.getInt("b_id"));
@@ -190,5 +196,40 @@ public class BoardDBBean {
 		}
 		return re;
 	}
-	
+	public int editBoard(BoardBean board) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		String sql = "";
+		int re = -1;
+
+		try {
+			conn = getConnection();
+			pstm = conn.prepareStatement("select b_pwd from boardt where b_id=?");
+			pstm.setInt(1, board.getB_id());
+			rs = pstm.executeQuery();
+			
+			if(rs.next()) {
+				if(rs.getString(1).equals(board.getB_pwd())) {
+					pstm = conn.prepareStatement("update boardt set b_name=?, b_email=?, b_title=?, b_content=? where b_id=?");
+					pstm.setString(1, board.getB_name());
+					pstm.setString(2, board.getB_email());
+					pstm.setString(3, board.getB_title());
+					pstm.setString(4, board.getB_content());
+					pstm.setInt(5, board.getB_id());
+					pstm.executeUpdate();
+					re = 1;
+				}else {
+					re = 0;
+				}
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("변경 실패");
+		}
+		pstm.close();
+		conn.close();
+		return re;
+	}
 }
