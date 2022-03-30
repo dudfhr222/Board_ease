@@ -150,6 +150,45 @@ public class BoardDBBean {
 		}
 		return board;
 	}
-	
+	public int deleteBoard(int id, String pwd) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		String sql = "";
+		
+		int re = -1;
+
+		try {
+			conn = getConnection();
+			pstm = conn.prepareStatement("select * from boardt where b_id=?");
+			pstm.setInt(1, id);
+			rs = pstm.executeQuery();
+			
+			if(rs.next()) {
+				if(pwd.equals(rs.getString("b_pwd"))) {
+					pstm = conn.prepareStatement("delete from boardt where b_id=?");
+					pstm.setInt(1, id);
+					rs = pstm.executeQuery();
+					re = 1;
+				}else {
+					re = 0;
+				}
+			}
+			pstm.close();
+			conn.close();
+			System.out.println("삭제 성공");
+		} catch (Exception e) {
+			System.out.println("삭제 실패");
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstm != null) pstm.close();
+				if(conn != null) conn.close();
+			}catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return re;
+	}
 	
 }

@@ -36,7 +36,11 @@
 				<td width = "150" align = "center">글내용</td>			
 				<td align = "left"><%=data.getB_content() %></td>			
 			</tr>
-			
+			<tr>
+				<td align ="right" colspan = "4">
+					<input type = "button" value = "글삭제" onclick ="location.href='delete.jsp?b_id=<%=data.getB_id()%>'">
+				</td>
+			</tr>
 		</table>
 	</form>
 </body>

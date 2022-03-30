@@ -23,3 +23,11 @@ function check_ok(){
 	
 	document.wt_frm.submit();
 }
+function delete_ok(){
+	if(dt_frm.b_pwd.value.length == 0){
+		alert("비밀번호을 작성해주세요");
+		dt_frm.b_pwd.focus();
+		return;
+	}
+	document.dt_frm.submit();
+}
