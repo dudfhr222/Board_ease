@@ -1,6 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" %>
 <!DOCTYPE html>
+<%
+	int b_id = 0, b_ref = 1, b_step = 0, b_level = 0;
+	String b_title="";
+	
+	if(request.getParameter("b_id")!=null){
+		b_id = Integer.parseInt(request.getParameter("b_id"));
+	}
+
+	BoardDBBean dbm = BoardDBBean.getInstance();
+	BoardBean board = dbm.getBoard(b_id, false);
+	
+	if(board != null){
+		b_title = board.getB_title();
+		b_ref = board.getB_ref();
+		b_step = board.getB_step();
+		b_level = board.getB_level();
+	}
+%>
 <html>
   <head>
     <meta charset="UTF-8" />
@@ -11,6 +29,11 @@ pageEncoding="UTF-8" %>
   <body>
     <h1>글 올 리 기</h1>
     <form name="wt_frm" method="post" action="writeOk.jsp">
+      <!-- value값 넘김 DBBEAN -->
+				<input name = "b_id" type = "hidden" value = "<%= b_id %>">
+				<input name = "b_ref" type = "hidden" value = "<%= b_ref %>">
+				<input name = "b_step" type = "hidden" value = "<%= b_step %>">
+				<input  name = "b_level" type = "hidden" value = "<%= b_level %>">
       <table border="1">
         <tr height="30">
           <td width="80">작성자</td>
@@ -25,7 +48,18 @@ pageEncoding="UTF-8" %>
         <tr height="30">
           <td width="80">글제목</td>
           <td colspan="3" width="460">
-            <input type="text" name="b_title" size="55" maxlength="80" />
+            <%
+							if(b_id == 0){
+						%> 
+							<input type = "text" name = "b_title" size = "55" maxlength = "80">
+						<%
+							}else{
+						%>
+							<input type = "text" name = "b_title" size = "55" maxlength = "80"
+									value = "[답변]:<%=b_title%>">
+						<%
+							}
+						%>
           </td>
         </tr>
         <tr>

@@ -3,9 +3,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	SimpleDateFormat sfd = new SimpleDateFormat("yyyy-MM-dd HH:mm)");
 	BoardDBBean dbm = BoardDBBean.getInstance();
 	int b_id = Integer.parseInt(request.getParameter("b_id"));
-	BoardBean data = dbm.getBoard(b_id);
+	
+	BoardBean data = dbm.getBoard(b_id, true);
 %>
 <html>
 <head>
@@ -20,7 +22,9 @@
 				<td width = "150" align = "center">글번호</td>			
 				<td align = "center"><%=data.getB_id() %></td>
 				<td width = "150" align = "center">조회수</td>			
-				<td align = "center"><%=data.getB_hit() %></td>			
+				<td align = "center"><%=data.getB_hit() %></td>		
+				<td width = "150" align = "center">IP주소</td>			
+				<td align = "center"><%=data.getB_ip() %></td>		
 			</tr>
 			<tr>
 				<td width = "150" align = "center">작성자</td>			
@@ -38,7 +42,10 @@
 			</tr>
 			<tr>
 				<td align ="right" colspan = "4">
+					<input type = "button" value = "글수정" onclick ="location.href='edit.jsp?b_id=<%=data.getB_id()%>'">
 					<input type = "button" value = "글삭제" onclick ="location.href='delete.jsp?b_id=<%=data.getB_id()%>'">
+					<input type = "button" value = "글목록" onclick ="location.href='list.jsp'">
+					<input type = "button" value = "답변글" onclick="location.href='write.jsp?b_id=<%=data.getB_id()%>'">
 				</td>
 			</tr>
 		</table>
