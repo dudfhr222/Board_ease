@@ -26,13 +26,17 @@ public class BoardDBBean {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		String sql = "insert into boardt values(?,?,?,?,?,?,?,?)";
+		String sql = "";
 //		String sql = "insert into boardt(b_id, b_name, b_email, b_title, b_content, b_date, b_hit, b_pwd)" 
 //					  + "values(?,?,?,?,?,?,?,?)";
 		int re = -1;
 		int count = 0;
-
-		try {
+		int id = board.getB_id();
+		int ref = board.getB_ref();
+		int step = board.getB_step();
+		int level = board.getB_level();
+	    
+	    try {
 			conn = getConnection();
 			//글 번호 부여
 			pstm = conn.prepareStatement("select max(b_id) from boardt");
@@ -43,23 +47,66 @@ public class BoardDBBean {
 			}else {
 				count = 1;
 			}
-			
-			//입력값 삽입
-			pstm = conn.prepareStatement(sql);
-			pstm.setInt(1,count);
-			pstm.setString(2,board.getB_name());
-			pstm.setString(3,board.getB_email());
-			pstm.setString(4,board.getB_title());
-			pstm.setString(5,board.getB_content());
-			pstm.setTimestamp(6,board.getB_date());
-			pstm.setInt(7,board.getB_hit());
-			pstm.setString(8,board.getB_pwd());
-			
-			pstm.executeUpdate();//UPDATE, DELETE
-			re = 1;
+			//답글인지 아닌지 기준??b_id
+			//B_ID == 0 : 글 작성
+			//B_ID != 0 : 답글 작성
+			//답글
+			if(board.getB_id() != 0) {
+				sql = "update boardt set b_step=b_step + 1 where b_ref=? and b_step > ?";
+				pstm = conn.prepareStatement(sql);
+				pstm.setInt(1, ref);
+				pstm.setInt(2, step);
+				pstm.executeUpdate();
+				
+				ref = board.getB_ref();
+				step += 1;
+				level +=1;
+				
+				sql = "insert into boardt values(?,?,?,?,?,?,?,?,?,?,?,?)";
+				pstm = conn.prepareStatement(sql);
+				pstm.setInt(1,count);
+				pstm.setString(2,board.getB_name());
+				pstm.setString(3,board.getB_email());
+				pstm.setString(4,board.getB_title());
+				pstm.setString(5,board.getB_content());
+				pstm.setTimestamp(6,board.getB_date());
+				pstm.setInt(7,board.getB_hit());
+				pstm.setString(8,board.getB_pwd());
+				pstm.setString(9,board.getB_ip());
+				pstm.setInt(10,ref);
+				pstm.setInt(11,step);
+				pstm.setInt(12,level);
+				
+				pstm.executeUpdate();//UPDATE, DELETE
+				re = 1;
+			}else{
+				//답글 아님
+				ref= count;
+				step = 0;
+				level = 0;
+				
+				sql = "insert into boardt values(?,?,?,?,?,?,?,?,?,?,?,?)";
+				pstm = conn.prepareStatement(sql);
+				pstm.setInt(1,count);
+				pstm.setString(2,board.getB_name());
+				pstm.setString(3,board.getB_email());
+				pstm.setString(4,board.getB_title());
+				pstm.setString(5,board.getB_content());
+				pstm.setTimestamp(6,board.getB_date());
+				pstm.setInt(7,board.getB_hit());
+				pstm.setString(8,board.getB_pwd());
+				pstm.setString(9,board.getB_ip());
+				pstm.setInt(10,count);
+				pstm.setInt(11,step);
+				pstm.setInt(12,level);
+				
+				pstm.executeUpdate();//UPDATE, DELETE
+				re = 1;
+			}
 			
 			pstm.close();
 			conn.close();
+	
 			System.out.println("추가 성공");
 		} catch (Exception e) {
 			System.out.println("추가 실패");
@@ -96,6 +143,10 @@ public class BoardDBBean {
 				board.setB_date(rs.getTimestamp(6));
 				board.setB_hit(rs.getInt(7));
 				board.setB_pwd(rs.getString(8));
+				board.setB_ip(rs.getString(9));
+				board.setB_ref(rs.getInt(10));
+				board.setB_step(rs.getInt(11));
+				board.setB_level(rs.getInt(12));
 				
 				list.add(board);
 			}
@@ -138,6 +189,10 @@ public class BoardDBBean {
 				board.setB_date(rs.getTimestamp("b_date"));
 				board.setB_hit(rs.getInt("b_hit"));
 				board.setB_pwd(rs.getString("b_pwd"));
+				board.setB_ip(rs.getString("b_ip"));
+				board.setB_ref(rs.getInt("b_ref"));
+				board.setB_step(rs.getInt("b_step"));
+				board.setB_level(rs.getInt("b_level"));
 			}
 			
 			rs.close();
