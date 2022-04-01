@@ -2,6 +2,8 @@
 - Write
 - List
 - Show
+- EDIT
+- DELETE
 
 
 with Java, JSP, HTML
