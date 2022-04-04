@@ -11,16 +11,16 @@
 <script type="text/javascript" src="board.js" charset="UTF-8"></script>
 		
 <%
-	BoardDBBean dbm = BoardDBBean.getInstance();
+	String pageNum = request.getParameter("pageNum");	
 	int b_id = Integer.parseInt(request.getParameter("b_id"));
-
+	BoardDBBean dbm = BoardDBBean.getInstance();
 	board = dbm.getBoard(b_id, false);
 %>
 
 </head>
 <body>
 	<h1 align = "center">글 수 정 하 기</h1>
-		<form name = "edit_frm" method = "post" action = "editOk.jsp?b_id=<%=board.getB_id() %>">
+		<form name = "edit_frm" method = "post" action = "editOk.jsp?b_id=<%=board.getB_id() %>&pageNum=<%= pageNum %>">
 			<table align = "center">
 				<tr height = "30">
 					<td width = "80">작성자</td>
@@ -51,7 +51,7 @@
 					<td colspan = "4">
 						<input type = "button" value = "글수정" onclick = "check_edit()">
 						<input type = "reset" value = "다시작성">
-						<input type = "button" value = "글목록" onclick="location.href='list.jsp'">
+						<input type = "button" value = "글목록" onclick="location.href='list.jsp?pageNum=<%= pageNum %>'">
 					</td>
 				</tr>
 			</table>

@@ -9,6 +9,8 @@
 <jsp:setProperty name = "board" property = "*"/>
 <%
 	response.setCharacterEncoding("UTF-8");
+
+	String pageNum = request.getParameter("pageNum");
 	BoardDBBean dbm = BoardDBBean.getInstance();
 	
 	int check = dbm.editBoard(board);
@@ -18,7 +20,7 @@
 		alert("수정 성공");
 </script>
 <%		
-	response.sendRedirect("list.jsp");
+	response.sendRedirect("list.jsp?pageNum=" + pageNum);
 	}else{
 %>
 <script>

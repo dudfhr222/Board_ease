@@ -6,9 +6,18 @@
 <jsp:useBean id = "data" class = "magic.board.BoardBean"/>
 <jsp:setProperty name = "data" property = "*"/>
 <%
+	String pageNum = request.getParameter("pageNum");
+	
+	if(pageNum == null){
+		pageNum = "1";
+	}
+
 	BoardDBBean dbm = BoardDBBean.getInstance();
-	ArrayList<BoardBean> list = dbm.listBoard();
-	int b_level = 0;
+//	ArrayList<BoardBean> list = dbm.listBoard();
+	ArrayList<BoardBean> list = dbm.listBoard(pageNum);
+	int b_level = 0, b_id = 0, b_hit = 0; 
+	String b_name, b_title, b_content;
+	Timestamp b_date;
 %>
 <html>
 <head>
@@ -67,9 +76,13 @@
 						<%=data.getB_hit() %>
 					</td>
 				</tr>
-<% 
-}
-%>			</table>
+						<% 
+						}
+						%>			
+			</table>
+			<div align = "center">
+				&nbsp;&nbsp;&nbsp;<%=	data.pageNumber(4)%>
+			</div>
 		</form>
 </body>
 </html>
