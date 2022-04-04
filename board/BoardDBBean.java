@@ -3,6 +3,7 @@ package Board.board;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.naming.Context;
@@ -122,33 +123,79 @@ public class BoardDBBean {
 		return re;
 	}
 	
-	public ArrayList<BoardBean> listBoard(){
+	public ArrayList<BoardBean> listBoard(String pageNumber){
 		Connection conn = null;
 		PreparedStatement pstm = null;
+		Statement stmt = null;
 		ResultSet rs = null;
-		String sql = "select * from boardt order by b_id";
+		ResultSet pageSet = null; 
+		
+		int dbCount = 0; //글이 총 몇개인지?
+		int absolutePage = 1; //첫 번째 게시글의 절대위치
+		
+		String sql = "select * from boardt order by b_ref desc, b_step asc";
+		String sql2 = "select count(*) from boardt";
+
 		ArrayList<BoardBean> list = new ArrayList<BoardBean>();
 		try {
 			conn = getConnection();
-			pstm = conn.prepareStatement(sql);
-			rs = pstm.executeQuery();
 			
-			while(rs.next()) {
-				BoardBean board = new BoardBean();
-				board.setB_id(rs.getInt(1));
-				board.setB_name(rs.getString(2));
-				board.setB_email(rs.getString(3));
-				board.setB_title(rs.getString(4));
-				board.setB_content(rs.getString(5));
-				board.setB_date(rs.getTimestamp(6));
-				board.setB_hit(rs.getInt(7));
-				board.setB_pwd(rs.getString(8));
-				board.setB_ip(rs.getString(9));
-				board.setB_ref(rs.getInt(10));
-				board.setB_step(rs.getInt(11));
-				board.setB_level(rs.getInt(12));
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			pageSet = stmt.executeQuery(sql2);
+			
+			if(pageSet.next()) {
+				dbCount = pageSet.getInt(1);
+				pageSet.close();
+			}
+			
+			//페이지 개수 설정 
+			if(dbCount % BoardBean.pageSize == 0) {
+				BoardBean.pageCount = dbCount / BoardBean.pageSize;
+			}else {
+				BoardBean.pageCount = dbCount / BoardBean.pageSize + 1;
+			}
+			
+			//페이지 번호 설정
+			if(pageNumber != null) {
+				BoardBean.pageNum = Integer.parseInt(pageNumber);
+				//1: 0*10+1 =1, 2: 1*10+1 =11
+				//페이지 단위로 끊기
+				absolutePage = (BoardBean.pageNum -1) * BoardBean.pageSize +1;
+			}
+//전방향 에러 발생	
+//			pstm = conn.prepareStatement(sql);
+//			rs = pstm.executeQuery();
+			
+			rs = stmt.executeQuery(sql);
+			
+			if(rs.next()) {
+				rs.absolute(absolutePage);
+				int count = 0;
 				
-				list.add(board);
+				while(count < BoardBean.pageSize) {
+					BoardBean board = new BoardBean();
+					board.setB_id(rs.getInt(1));
+					board.setB_name(rs.getString(2));
+					board.setB_email(rs.getString(3));
+					board.setB_title(rs.getString(4));
+					board.setB_content(rs.getString(5));
+					board.setB_date(rs.getTimestamp(6));
+					board.setB_hit(rs.getInt(7));
+					board.setB_pwd(rs.getString(8));
+					board.setB_ip(rs.getString(9));
+					board.setB_ref(rs.getInt(10));
+					board.setB_step(rs.getInt(11));
+					board.setB_level(rs.getInt(12));
+					
+					list.add(board);
+					
+					if(rs.isLast()) {
+						break;
+					}else {
+						rs.next();
+					}
+					count++;
+				}
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

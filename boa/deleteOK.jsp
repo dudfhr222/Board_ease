@@ -5,6 +5,7 @@
 <%
 	int id = Integer.parseInt(request.getParameter("b_id"));
 	String pwd = request.getParameter("b_pwd");
+	String pageNum = request.getParameter("pageNum");
 	
 	BoardDBBean dbm = BoardDBBean.getInstance();
 	int check = dbm.deleteBoard(id, pwd);
@@ -14,7 +15,7 @@
 		alert("삭제 성공");
 </script>
 <%		
-	response.sendRedirect("list_t.jsp");
+	response.sendRedirect("list.jsp?pageNum=" + pageNum);
 	}else{
 %>
 <script>

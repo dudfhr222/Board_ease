@@ -12,10 +12,39 @@ public class BoardBean {
 	private int b_hit;
 	private String b_pwd;
 	private String b_ip;
-	private int b_ref;
-	private int b_step;
-	private int b_level;
+	private int b_ref = 0;
+	private int b_step = 0;
+	private int b_level = 0;
 	
+	public static int pageSize = 10; //한 페이지당 10개  출력물
+	public static int pageCount = 1;//페이지 개수 지정 변수
+	public static int pageNum = 1;//페이지 번호
+	
+	//표시할 페이지 개수
+	public static String pageNumber(int limit) {
+		String str = "";
+		int temp = (pageNum - 1) % limit;
+		int startPage = pageNum - temp;
+		//이전 출력
+		if((startPage - limit) > 0) {
+			str = "<a href='list.jsp?pageNum=" + (startPage-1) + "'>[이전]</a>&nbsp;&nbsp;";
+		}
+		//페이지 번호 나열
+		for(int i = startPage;i<(startPage+limit);i++) {
+			if(i == pageNum) {
+				str += "["+i+"]&nbsp;&nbsp;";
+			}else {
+				str += "<a href='list.jsp?pageNum="+i+"'>"+"["+i+"]</a>&nbsp;&nbsp;";
+			}
+			if(i >= pageCount) break;
+		}
+		//다음 출력
+		if((startPage + limit) <= pageCount) {
+			str += "<a href='list.jsp?pageNum=" + (startPage+limit) + "'>[다음]</a>&nbsp;&nbsp;";
+		}
+		return str;
+	}
+
 	public int getB_ref() {
 		return b_ref;
 	}
