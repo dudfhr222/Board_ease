@@ -37,6 +37,7 @@
 			<table border = "1" width = "1200" align = "center">
 				<tr height = "25">
 					<td width = "40" align = "center">번호</td>
+					<td width = "80" align = "center">첨부파일</td>
 					<td width = "700" align = "center">글제목</td>
 					<td width = "100" align = "center">작성자</td>
 					<td width = "200" align = "center">작성일</td>
@@ -49,6 +50,15 @@
 %>					
 					<tr onmouseover="this.style.color='red';" onmouseout="this.style.color='blue';"> 
 					<td align = "center"><%=data.getB_id() %></td>
+					<td align = "center">
+						<%
+							if(data.getB_fsize()>0){
+						%>
+							<img src="C:\Users\Administrator\Desktop\[디지털컨버전스]자바(JAVA)&스프링프레임워크디지털실무자양성과정B-1\JSP/zip.gif">
+						<%
+								}
+						%>
+					</td>
 					<td align = "left">
 <%
 						if(b_level > 0){

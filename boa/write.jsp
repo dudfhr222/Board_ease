@@ -62,6 +62,12 @@ pageEncoding="UTF-8" %>
 						%>
           </td>
         </tr>
+        <tr height = "30">
+					<td width = "80">파일</td>
+					<td colspan = "3" width = "140">
+						<input type = "file" name="b_fname" size = "40" maxlength = "100">
+					</td>
+				</tr>
         <tr>
           <td colspan="4">
             <textarea cols="65" rows="10" name="b_content"></textarea>
@@ -75,11 +81,7 @@ pageEncoding="UTF-8" %>
           <td colspan="4">
             <input type="button" value="글쓰기" onclick="check_ok()" />
             <input type="reset" value="다시작성" />
-            <input
-              type="button"
-              value="글목록"
-              onclick="javascript:window.location='list.jsp'"
-            />
+            <input type = "button" value = "글목록" onclick="javascript:window.location='list.jsp?pageNum=<%=pageNum%>'">
           </td>
         </tr>
       </table>

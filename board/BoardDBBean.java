@@ -86,7 +86,7 @@ public class BoardDBBean {
 				step = 0;
 				level = 0;
 				
-				sql = "insert into boardt values(?,?,?,?,?,?,?,?,?,?,?,?)";
+				sql = "insert into boardt values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				pstm = conn.prepareStatement(sql);
 				pstm.setInt(1,count);
 				pstm.setString(2,board.getB_name());
@@ -100,6 +100,8 @@ public class BoardDBBean {
 				pstm.setInt(10,count);
 				pstm.setInt(11,step);
 				pstm.setInt(12,level);
+				pstm.setString(13,board.getB_fname());
+				pstm.setInt(14,board.getB_fsize());
 				
 				pstm.executeUpdate();//UPDATE, DELETE
 				re = 1;
@@ -186,6 +188,9 @@ public class BoardDBBean {
 					board.setB_ref(rs.getInt(10));
 					board.setB_step(rs.getInt(11));
 					board.setB_level(rs.getInt(12));
+					board.setB_fname(rs.getString(13));
+					board.setB_fsize(rs.getInt(14));
+					
 					
 					list.add(board);
 					
@@ -240,6 +245,8 @@ public class BoardDBBean {
 				board.setB_ref(rs.getInt("b_ref"));
 				board.setB_step(rs.getInt("b_step"));
 				board.setB_level(rs.getInt("b_level"));
+				board.setB_fname(rs.getString("b_fname"));
+				board.setB_fsize(rs.getInt("b_fsize"));
 			}
 			
 			rs.close();
