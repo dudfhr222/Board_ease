@@ -32,6 +32,20 @@
 				<td width = "150" align = "center">작성일</td>			
 				<td align = "center"><%=data.getB_date() %></td>						
 			</tr>
+			<tr align = "center" height = "30">
+				<td width = "110" >파일</td>			
+					<td colspan = "5">
+					<%
+						if(data.getB_fname() != null){
+					%>
+						<img src="C:\Users\Administrator\Desktop\[디지털컨버전스]자바(JAVA)&스프링프레임워크디지털실무자양성과정B-1\JSP/zip.gif">
+						<a href = "./upload/<%= data.getB_fname() %>">(원본파일 : <%= data.getB_fname() %>)</a>
+					<%
+						}
+					%>
+					</td>			
+				</tr>
+			<tr>
 			<tr>
 				<td width = "150" align = "center">글제목</td>			
 				<td align = "left"><%=data.getB_title() %></td>			
@@ -44,7 +58,7 @@
 				<td align ="right" colspan = "4">
 					<input type = "button" value = "글수정" onclick ="location.href='edit.jsp?b_id=<%=data.getB_id()%>'">
 					<input type = "button" value = "글삭제" onclick ="location.href='delete.jsp?b_id=<%=data.getB_id()%>'">
-					<input type = "button" value = "글목록" onclick ="location.href='list.jsp'">
+					<input type = "button" value = "글목록" onclick ="location.href='list.jsp?pageNum=<%=pageNum%>'">
 					<input type = "button" value = "답변글" onclick="location.href='write.jsp?b_id=<%=data.getB_id()%>'">
 				</td>
 			</tr>

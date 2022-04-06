@@ -8,6 +8,15 @@
 	String pageNum = request.getParameter("pageNum");
 	
 	BoardDBBean dbm = BoardDBBean.getInstance();
+	BoardBean board = dbm.getBoard(id, false);
+	String fName = board.getB_fname();
+	String up = "D:\\space_magic\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\magicWebApp\\upload\\";
+	
+	if(fName != null){
+		File file = new File(up + fName);
+		file.delete();
+	}
+	
 	int check = dbm.deleteBoard(id, pwd);
 	if(check == 1){
 %>
