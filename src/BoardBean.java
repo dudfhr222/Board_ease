@@ -1,65 +1,80 @@
-package Board.board;
+package magic.board;
 
 import java.sql.Timestamp;
 
 public class BoardBean {
+	private int b_id;
 	private String b_name;
 	private String b_email;
 	private String b_title;
 	private String b_content;
-	private int b_id;
 	private Timestamp b_date;
 	private int b_hit;
 	private String b_pwd;
 	private String b_ip;
-	private int b_ref = 0;
-	private int b_step = 0;
-	private int b_level = 0;
+	private int b_ref=0;
+	private int b_step=0;
+	private int b_level=0;
+	
 	private String b_fname;
 	private int b_fsize;
 	
+	private String b_rfname;
+	
+	public String getB_rfname() {
+		return b_rfname;
+	}
+
+	public void setB_rfname(String b_rfname) {
+		this.b_rfname = b_rfname;
+	}
+
 	public String getB_fname() {
 		return b_fname;
 	}
+
 	public void setB_fname(String b_fname) {
 		this.b_fname = b_fname;
 	}
+
 	public int getB_fsize() {
 		return b_fsize;
 	}
+
 	public void setB_fsize(int b_fsize) {
 		this.b_fsize = b_fsize;
 	}
-
-	public static int pageSize = 10; //í•œ í˜ì´ì§€ë‹¹ 10ê°œ  ì¶œë ¥ë¬¼
-	public static int pageCount = 1;//í˜ì´ì§€ ê°œìˆ˜ ì§€ì • ë³€ìˆ˜
-	public static int pageNum = 1;//í˜ì´ì§€ ë²ˆí˜¸
+	public static int pageSize = 10; //ÇÑ ÆäÀÌÁö´ç 10°³ Ãâ·Â¹°
+	public static int pageCount = 1; //ÆäÀÌÁö °³¼ö ÁöÁ¤ º¯¼ö
+	public static int pageNum = 1; //ÆäÀÌÁö ¹øÈ£
 	
-	//í‘œì‹œí•  í˜ì´ì§€ ê°œìˆ˜
-	public static String pageNumber(int limit) {
-		String str = "";
-		int temp = (pageNum - 1) % limit;
-		int startPage = pageNum - temp;
-		//ì´ì „ ì¶œë ¥
-		if((startPage - limit) > 0) {
-			str = "<a href='list.jsp?pageNum=" + (startPage-1) + "'>[ì´ì „]</a>&nbsp;&nbsp;";
+	public static String pageNumer(int limit) {
+		String str="";
+		int temp = (pageNum-1) % limit;
+		int startPage=pageNum - temp;
+		
+		//[ÀÌÀü] Ãâ·Â
+		if ((startPage - limit) > 0) {
+			str="<a href='list.jsp?pageNum="+(startPage-1)+"'>[ÀÌÀü]</a>&nbsp;&nbsp;";
 		}
-		//í˜ì´ì§€ ë²ˆí˜¸ ë‚˜ì—´
-		for(int i = startPage;i<(startPage+limit);i++) {
-			if(i == pageNum) {
+		
+		//ÆäÀÌÁö ¹øÈ£ ³ª¿­ÇÏ±â
+		for (int i = startPage; i < (startPage+limit); i++) {
+			if (i == pageNum) {
 				str += "["+i+"]&nbsp;&nbsp;";
-			}else {
+			} else {
 				str += "<a href='list.jsp?pageNum="+i+"'>"+"["+i+"]</a>&nbsp;&nbsp;";
 			}
 			if(i >= pageCount) break;
 		}
-		//ë‹¤ìŒ ì¶œë ¥
-		if((startPage + limit) <= pageCount) {
-			str += "<a href='list.jsp?pageNum=" + (startPage+limit) + "'>[ë‹¤ìŒ]</a>&nbsp;&nbsp;";
+		//[´ÙÀ½] Ãâ·Â
+		if ((startPage + limit) <= pageCount) {
+			str +="<a href='list.jsp?pageNum="+(startPage+limit)+"'>[´ÙÀ½]</a>";
 		}
+		
 		return str;
 	}
-
+	
 	public int getB_ref() {
 		return b_ref;
 	}
@@ -78,14 +93,12 @@ public class BoardBean {
 	public void setB_level(int b_level) {
 		this.b_level = b_level;
 	}
-	
 	public String getB_ip() {
 		return b_ip;
 	}
 	public void setB_ip(String b_ip) {
 		this.b_ip = b_ip;
 	}
-	
 	public String getB_pwd() {
 		return b_pwd;
 	}
@@ -134,4 +147,5 @@ public class BoardBean {
 	public void setB_content(String b_content) {
 		this.b_content = b_content;
 	}
+	
 }
