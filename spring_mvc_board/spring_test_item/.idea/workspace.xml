@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2806602d-e8aa-45e7-8751-ca71d4a1e032" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../spring_mvc_board/src/main/java/com/javalec/spring_mvc_board/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_mvc_board/src/main/java/com/javalec/spring_mvc_board/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring_mvc_board/src/main/java/com/javalec/spring_mvc_board/command/BListCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_mvc_board/src/main/java/com/javalec/spring_mvc_board/command/BListCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring_mvc_board/src/main/java/com/javalec/spring_mvc_board/controller/BController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_mvc_board/src/main/java/com/javalec/spring_mvc_board/controller/BController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring_mvc_board/src/main/java/com/javalec/spring_mvc_board/dao/BDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_mvc_board/src/main/java/com/javalec/spring_mvc_board/dao/BDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring_mvc_board/src/main/webapp/WEB-INF/views/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_mvc_board/src/main/webapp/WEB-INF/views/board.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring_mvc_board/src/main/webapp/WEB-INF/views/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_mvc_board/src/main/webapp/WEB-INF/views/list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring_mvc_board/src/main/webapp/WEB-INF/views/write_view.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_mvc_board/src/main/webapp/WEB-INF/views/write_view.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring_mvc_board/target/classes/com/javalec/spring_mvc_board/HomeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_mvc_board/target/classes/com/javalec/spring_mvc_board/HomeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring_mvc_board/target/classes/com/javalec/spring_mvc_board/command/BCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_mvc_board/target/classes/com/javalec/spring_mvc_board/command/BCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring_mvc_board/target/classes/com/javalec/spring_mvc_board/command/BListCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_mvc_board/target/classes/com/javalec/spring_mvc_board/command/BListCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring_mvc_board/target/classes/com/javalec/spring_mvc_board/command/BWriteCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_mvc_board/target/classes/com/javalec/spring_mvc_board/command/BWriteCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring_mvc_board/target/classes/com/javalec/spring_mvc_board/controller/BController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_mvc_board/target/classes/com/javalec/spring_mvc_board/controller/BController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring_mvc_board/target/classes/com/javalec/spring_mvc_board/dao/BDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_mvc_board/target/classes/com/javalec/spring_mvc_board/dao/BDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring_mvc_board/target/classes/com/javalec/spring_mvc_board/dto/BDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_mvc_board/target/classes/com/javalec/spring_mvc_board/dto/BDto.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="29Ju3SKBflEaTnCTi5JaqSB4dFH" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/space_spring/spring_test_item/.project",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2806602d-e8aa-45e7-8751-ca71d4a1e032" name="Changes" comment="" />
+      <created>1652843310123</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1652843310123</updated>
+      <workItem from="1652843311306" duration="118000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
