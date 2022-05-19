@@ -7,12 +7,10 @@ public class BDto {
 	String bName;
 	String bTitle;
 	String bContent;
-	Timestamp bDate;
-	int bHit;
+	Timestamp bDate; //오늘 날짜
+	int bHit; //조회수
 	
-	public BDto() {
-		// TODO Auto-generated constructor stub
-	}
+	public BDto() {}
 	
 	public BDto(int bId, String bName, String bTitle, String bContent, Timestamp bDate, int bHit) {
 		this.bId = bId;
@@ -59,5 +57,7 @@ public class BDto {
 	public void setbHit(int bHit) {
 		this.bHit = bHit;
 	}
+	
+	
 	
 }
